@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b2447">
+  <link rel="manifest" href="manifest.json">
+  <title>Mandatory Material List</title>
+  <style>
+    :root {
+      --navy:#0b2447; --blue:#19376d; --cyan:#38bdf8; --bg:#f3f7fb;
+      --card:#fff; --text:#10233f; --muted:#68778a; --line:#dbe5ef;
+      --green:#0f9f6e; --shadow:0 14px 34px rgba(11,36,71,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;padding:calc(22px + env(safe-area-inset-top)) 20px 34px}
+    .wrap{max-width:840px;margin:auto}
+    .brand{display:flex;align-items:center;gap:13px}
+    .logo{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.13);display:grid;place-items:center;font-size:24px}
+    h1{font-size:25px;margin:0}
+    .subtitle{opacity:.78;margin:5px 0 0;font-size:14px}
+    .meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:7px 11px;border-radius:999px;font-size:13px}
+    main{padding:0 16px 40px;margin-top:-18px}
+    .panel{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+    label{display:block;font-size:13px;font-weight:700;margin:0 0 8px}
+    .searchrow{display:flex;gap:9px}
+    input{flex:1;min-width:0;padding:15px 14px;border:1px solid var(--line);border-radius:13px;font-size:16px;text-transform:uppercase;outline:none}
+    input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(56,189,248,.15)}
+    button{border:0;border-radius:13px;padding:0 18px;background:var(--navy);color:white;font-weight:800;font-size:15px}
+    .hint{margin:10px 2px 0;color:var(--muted);font-size:12px}
+    #result{margin-top:16px}
+    .result{background:white;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .topline{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .cardno{font-size:22px;font-weight:900;color:var(--navy)}
+    .count{background:#e8f7f2;color:var(--green);padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+    .tasktitle{font-size:13px;line-height:1.45;color:var(--muted);margin-top:6px}
+    .materials{display:grid;gap:9px;margin-top:17px}
+    .material{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfdff}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:0 0 auto}
+    .empty{text-align:center;padding:25px 12px;color:var(--muted)}
+    .archive{margin-top:18px}
+    .archive h2{font-size:17px;margin:0 0 11px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);background:white;color:var(--blue);border-radius:999px;padding:8px 10px;font-size:12px;font-weight:700;cursor:pointer}
+    footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+    @media(max-width:520px){button{padding:0 14px} h1{font-size:22px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">✈️</div>
+      <div>
+        <h1>Mandatory Material List</h1>
+        <p class="subtitle">Task Card Material Finder</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="pill">Aircraft: TC-LUK</span>
+      <span class="pill">Engine: PW ENG</span>
+      <span class="pill">Type: A320</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <label for="taskInput">Task Card Number</label>
+    <div class="searchrow">
+      <input id="taskInput" placeholder="Example: A320-24-064" autocomplete="off">
+      <button id="searchBtn">SEARCH</button>
+    </div>
+    <p class="hint">Enter the complete A320 Task Card number.</p>
+  </section>
+
+  <section id="result"></section>
+
+  <section class="archive panel">
+    <h2>TC-LUK Archive</h2>
+    <div class="chips" id="chips"></div>
+  </section>
+</main>
+
+<footer>Mandatory Material List • TC-LUK / PW ENG</footer>
+
+<script>
+const DB = {"A320-00-001": {"title": "PREPARATION OF MAINTENANCE", "materials": ["EMG DOOR SLIDE STICKER (8 EA)", "STATICPSTICKERDAIREUR (6 EA)", "IKAZKURDELESIBILYF05E (3 EA)", "MPM1.13A/01 R04 (5 EA)", "902447 (1 EA)", "MPM1.13A/09 R01 (40 EA)"]}, "A320-21-005": {"title": "DISCARD LAVATORY AIR EXTRACTION FILTER ELEMENT", "materials": ["P15-350S (0,5 EA)"]}, "A320-24-064": {"title": "DISCARD IDG SCAVENGE AND CHARGE FILTERS, DRAIN AND REPLENISH OIL SYSTEM", "materials": ["5909812 (4 EA)", "AS3208-05 (4 EA)", "AS3209-226 (4 EA)", "EASTMAN-TURBO-OIL-2197 (12 EA)", "ISOPROPYLALCOHOL-1LT (2 LT)", "MS20995C32 (6 MT)", "5909812 (2 EA)", "AS3208-05 (1 EA)", "M83248-1-226 (2 EA)"]}, "A320-24-065": {"title": "CHECK TORQUE OF IDG QUICK-ATTACH-DETACH (QAD) TENSION BOLT", "materials": ["WADIS24 (0,1)", "EASTMAN-TURBO-OIL-2197 (1 QT)", "WADIS24 (0,2)"]}, "A320-25-124": {"title": "CHECK DOOR/EMERGENCY EXIT/OFFWING ESCAPE SLIDE/RAFT INFLATION RESERVOIR PRESSURE / CLEANING OF MONITORS", "materials": ["SCREENPAD2000", "SCREENPAD2000 (6 EA)"]}, "A320-25-172": {"title": "SEAT TRACK CLEANING", "materials": ["LOTOXANE (0,1)"]}, "A320-25-196": {"title": "DETAILED INSPECTION AND CLEANING OF LAVATORY PARTS IN SHOP", "materials": ["34655.7708.7.170 (0,2)"]}, "A320-25-273": {"title": "CLEANING OF THE INNER OVEN", "materials": ["MPM1.13A/09 R01 (7 EA)", "LIF SIZBEZ (1 EA)", "FIRCA1NUMARA (1 EA)", "GREASESTRIPPLUS (0,3 EA)"]}, "A320-12-009": {"title": "CLEANING OF BOARDING BRIDGE MARKS AROUND THE DOOR", "materials": ["LOTOXANE (0,1)"]}, "A320-21-004": {"title": "DISCARD FILTER CARTRIDGE (PALL)", "materials": ["21FA322G (1 EA)"]}, "A320-21-075": {"title": "CLEANING OF TEMPERATURE SENSORS (LH PACK)", "materials": ["AS3582-017 (4 EA)", "NAS1149C0932R (1 EA)", "VVP236 (0,1 EA)", "14QDB1 (3 FT)"]}, "A320-21-076": {"title": "CLEANING OF TEMPERATURE SENSORS (RH PACK)", "materials": ["AS3582-017 (4 EA)", "NAS1149C0932R (1 EA)", "VVP236 (0,1 EA)", "14QDB1 (3 FT)"]}, "A320-25-022": {"title": "REMOVE AND DISCARD FILTER ELEMENT", "materials": ["P15-350S (1 EA)"]}, "A320-25-046": {"title": "CLEAN & CARE PROCEDURE FOR LEATHER COVERS (PAX SEATS)", "materials": ["LM-023-5LT (1 EA)", "LM-017 (1 EA)"]}, "A320-25-050": {"title": "COCKPIT CLEANING", "materials": ["NETAL2050 (0,1 EA)", "ISOPROPYLALCOHOL-1LT (0,1 EA)"]}, "A320-25-087": {"title": "GENERAL VISUAL INSPECTION OF CABIN", "materials": ["SSG155-278RE-C153 (2 EA)"]}, "A320-27-010": {"title": "LUBRICATE SPOILER NO.1 TO 5 ACTUATOR ATTACHMENT-RH", "materials": ["AEROSHELL7-400GM (1 EA)"]}, "A320-27-009": {"title": "LUBRICATE SPOILER NO.1 TO 5 ACTUATOR ATTACHMENT-LH", "materials": ["AEROSHELL7-400GM (1 EA)"]}, "A320-27-006": {"title": "OPC OF LOGICS ACTIVATING ELAC 1&2, SEC 1 STBY PWR SPLY & SIDESTICK PRIORITY FUNCTION", "materials": ["MPM1.13A/09 R01 (10 EA)"]}, "A320-27-011": {"title": "LUBRICATE THS ACTUATOR BALL SCREW NUT", "materials": ["AEROSHELL7-400GM (1 EA)"]}};
+const input = document.getElementById('taskInput');
+const result = document.getElementById('result');
+const chips = document.getElementById('chips');
+
+function normalize(v) {
+  return v.trim().toUpperCase().replace(/\s+/g,'').replace(/–|—/g,'-');
+}
+
+function searchTask() {
+  const key = normalize(input.value);
+  const item = DB[key];
+  if (!key) {
+    result.innerHTML = '<div class="result empty">Please enter a Task Card number.</div>';
+    return;
+  }
+  if (!item) {
+    result.innerHTML = `<div class="result empty"><strong>${key}</strong><br><br>No material record was found in the TC-LUK archive.</div>`;
+    return;
+  }
+  result.innerHTML = `
+    <div class="result">
+      <div class="topline">
+        <div>
+          <div class="cardno">${key}</div>
+          <div class="tasktitle">${item.title}</div>
+        </div>
+        <div class="count">${item.materials.length} MATERIAL${item.materials.length > 1 ? 'S' : ''}</div>
+      </div>
+      <div class="materials">
+        ${item.materials.map(m => `<div class="material"><span class="dot"></span><strong>${m}</strong></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+Object.keys(DB).sort().forEach(key => {
+  const b = document.createElement('button');
+  b.className = 'chip';
+  b.textContent = key;
+  b.onclick = () => { input.value = key; searchTask(); window.scrollTo({top:0,behavior:'smooth'}); };
+  chips.appendChild(b);
+});
+
+document.getElementById('searchBtn').onclick = searchTask;
+input.addEventListener('keydown', e => { if(e.key === 'Enter') searchTask(); });
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+</script>
+</body>
+</html>
