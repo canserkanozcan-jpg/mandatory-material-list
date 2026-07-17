@@ -1,265 +1,146 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1f33" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Mandatory List" />
-  <link rel="manifest" href="manifest.json" />
-  <title>Mandatory Material List</title>
-  <style>
-    :root {
-      --bg: #f4f7fb;
-      --panel: #ffffff;
-      --navy: #0b1f33;
-      --blue: #1667c5;
-      --blue-soft: #eaf3ff;
-      --line: #dbe4ef;
-      --text: #182433;
-      --muted: #65758a;
-      --success: #137a45;
-      --danger: #b42318;
-      --shadow: 0 10px 30px rgba(11,31,51,.09);
-      --radius: 18px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header {
-      background: linear-gradient(135deg, #0b1f33, #154b7f);
-      color: white;
-      padding: calc(22px + env(safe-area-inset-top)) 18px 24px;
-      box-shadow: var(--shadow);
-    }
-    .header-inner { max-width: 1050px; margin: 0 auto; }
-    .brand { display:flex; align-items:center; gap:12px; }
-    .logo {
-      width: 46px; height: 46px; border-radius: 14px;
-      display:grid; place-items:center; font-weight:800;
-      background: rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25);
-    }
-    h1 { margin:0; font-size: 22px; letter-spacing:.2px; }
-    .subtitle { margin-top:6px; opacity:.8; font-size:14px; }
-    main { max-width:1050px; margin:0 auto; padding:18px 14px 40px; }
-    .search-card, .result-card, .empty-card, .about-card {
-      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .search-card { padding:16px; margin-bottom:16px; }
-    label { display:block; font-size:13px; color:var(--muted); margin-bottom:8px; font-weight:700; }
-    .search-row { display:flex; gap:10px; }
-    input {
-      width:100%; padding:15px 16px; border:1px solid var(--line); border-radius:14px;
-      font-size:16px; outline:none; background:#fff;
-    }
-    input:focus { border-color:var(--blue); box-shadow:0 0 0 4px rgba(22,103,197,.12); }
-    button {
-      border:0; border-radius:14px; padding:0 18px; font-weight:800;
-      background:var(--blue); color:white; cursor:pointer;
-    }
-    .stats {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px;
-    }
-    .stat {
-      background:var(--blue-soft); border-radius:14px; padding:12px;
-    }
-    .stat b { display:block; font-size:18px; }
-    .stat span { font-size:12px; color:var(--muted); }
-    .suggestions {
-      display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
-    }
-    .chip {
-      border:1px solid var(--line); background:#fff; color:var(--text); padding:8px 11px;
-      border-radius:999px; font-size:13px; cursor:pointer;
-    }
-    .section-title { margin:22px 2px 10px; font-size:16px; color:var(--muted); font-weight:800; }
-    .result-card { margin-bottom:12px; overflow:hidden; }
-    .card-head {
-      padding:16px; display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
-      border-bottom:1px solid var(--line);
-    }
-    .pn { font-size:17px; font-weight:900; word-break:break-word; }
-    .desc { color:var(--muted); margin-top:4px; font-size:14px; }
-    .qty {
-      min-width:86px; text-align:center; border-radius:14px; background:#eaf8f0;
-      color:var(--success); padding:10px 8px; font-weight:900;
-    }
-    .qty small { display:block; font-size:10px; color:#4f7862; margin-top:2px; }
-    .details {
-      display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
-    }
-    .detail { background:white; padding:12px; }
-    .detail span { display:block; color:var(--muted); font-size:11px; margin-bottom:4px; }
-    .detail b { font-size:14px; }
-    details { border-top:1px solid var(--line); }
-    summary { padding:13px 16px; cursor:pointer; color:var(--blue); font-weight:800; font-size:13px; }
-    .wo-box { padding:0 16px 16px; color:var(--muted); font-size:13px; line-height:1.6; }
-    .empty-card, .about-card { padding:22px; text-align:center; color:var(--muted); }
-    .hidden { display:none; }
-    footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; }
-    @media (max-width:650px) {
-      .details { grid-template-columns:repeat(2,1fr); }
-      .stats { grid-template-columns:1fr 1fr; }
-      .stats .stat:last-child { grid-column:1/-1; }
-      .search-row { flex-direction:column; }
-      button { padding:14px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1f33">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mandatory List">
+<link rel="manifest" href="manifest.json">
+<title>Mandatory Material List</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--navy:#0b1f33;--blue:#1667c5;--soft:#eaf3ff;--line:#dbe4ef;--text:#182433;--muted:#65758a;--green:#137a45;--shadow:0 10px 30px rgba(11,31,51,.09);--radius:18px}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,#0b1f33,#154b7f);color:#fff;padding:calc(22px + env(safe-area-inset-top)) 18px 24px;box-shadow:var(--shadow)}
+.header-inner,main{max-width:1050px;margin:0 auto}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:800;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25)}
+h1{margin:0;font-size:22px}.subtitle{margin-top:6px;opacity:.82;font-size:14px}main{padding:18px 14px 40px}
+.panel,.result-card,.empty-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.panel{padding:16px;margin-bottom:16px}.field{margin-bottom:14px}.field:last-child{margin-bottom:0}label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:800}
+input,select{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;font-size:16px;background:#fff;outline:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(22,103,197,.12)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.stat{background:var(--soft);border-radius:14px;padding:12px}.stat b{display:block;font-size:18px}.stat span{font-size:12px;color:var(--muted)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 12px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+.section-title{margin:22px 2px 10px;font-size:16px;color:var(--muted);font-weight:900}.result-card{margin-bottom:12px;overflow:hidden}.card-head{padding:16px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-bottom:1px solid var(--line)}
+.pn{font-size:17px;font-weight:900;word-break:break-word}.desc{color:var(--muted);margin-top:4px;font-size:14px}.qty{min-width:90px;text-align:center;border-radius:14px;background:#eaf8f0;color:var(--green);padding:10px 8px;font-weight:900}.qty small{display:block;font-size:10px;color:#4f7862;margin-top:2px}
+.details{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}.detail{background:#fff;padding:12px}.detail span{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.detail b{font-size:14px}
+details{border-top:1px solid var(--line)}summary{padding:13px 16px;cursor:pointer;color:var(--blue);font-weight:800;font-size:13px}.wo-box{padding:0 16px 16px;color:var(--muted);font-size:13px;line-height:1.7}
+.empty-card{padding:22px;text-align:center;color:var(--muted)}.hidden{display:none!important}.card-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.task-name{font-size:13px;color:#35516f;margin-top:3px;font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.details{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+</style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <div class="logo">MML</div>
-      <div>
-        <h1>Mandatory Material List</h1>
-        <div class="subtitle">TC-LUK • PW ENG • NRC hariç doğrulanmış ortak malzemeler</div>
-      </div>
+<header><div class="header-inner"><div class="brand"><div class="logo">MML</div><div><h1>Mandatory Material List</h1><div class="subtitle">Uçak seç • Uçağa özgü kartlardan malzeme listesini görüntüle</div></div></div></div></header>
+<main>
+<section class="panel">
+  <div class="grid">
+    <div class="field">
+      <label for="aircraftSearch">Uçak tescilini yaz veya seç</label>
+      <input id="aircraftSearch" list="aircraftList" placeholder="Örn: TC-LUK">
+      <datalist id="aircraftList"></datalist>
+    </div>
+    <div class="field">
+      <label for="taskSearch">Task Card numarası veya kart adı</label>
+      <input id="taskSearch" placeholder="Önce uçak seçin" disabled>
     </div>
   </div>
-</header>
-
-<main>
-  <section class="search-card">
-    <label for="search">Task Card numarasını yaz</label>
-    <div class="search-row">
-      <input id="search" type="search" placeholder="Örn: EO-24-0018 veya A320-21-075" autocomplete="off" />
-      <button id="clearBtn" type="button">Temizle</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><b id="taskCount">0</b><span>Task Card</span></div>
-      <div class="stat"><b id="materialCount">0</b><span>Ortak malzeme satırı</span></div>
-      <div class="stat"><b>%100</b><span>İlgili kartın tüm WO'larında ortak</span></div>
-    </div>
-    <div class="suggestions" id="suggestions"></div>
-  </section>
-
-  <div id="resultTitle" class="section-title hidden"></div>
-  <section id="results"></section>
-  <section id="empty" class="empty-card">
-    Task Card numarası yazarak gerekli ortak malzemeleri görüntüleyin.
-  </section>
+  <div class="stats">
+    <div class="stat"><b id="aircraftCount">0</b><span>Uçak</span></div>
+    <div class="stat"><b id="taskCount">0</b><span>Seçili uçaktaki kart</span></div>
+    <div class="stat"><b id="materialCount">0</b><span>Ortak malzeme satırı</span></div>
+  </div>
+  <div class="toolbar">
+    <button class="chip" id="showAllCards" disabled>Tüm kartları göster</button>
+    <button class="chip" id="clearAll">Temizle</button>
+  </div>
+  <div id="cardList" class="card-list hidden"></div>
+</section>
+<div id="resultTitle" class="section-title hidden"></div>
+<section id="results"></section>
+<section id="empty" class="empty-card">Uçak tescilini seçerek başlayın.</section>
 </main>
-
-<footer>
-  Geçmiş doğrulanmış çekim verisine dayanır. Güncel efektivite ve task requirement ayrıca kontrol edilmelidir.
-</footer>
-
+<footer>Geçmiş doğrulanmış çekim verisine dayanır. Güncel efektivite ve task requirement ayrıca kontrol edilmelidir.</footer>
 <script src="data.js"></script>
 <script>
-  const DATA = window.MML_DATA;
-  const cards = DATA.taskCards;
-  const taskNames = Object.keys(cards).sort();
-  const search = document.getElementById('search');
-  const results = document.getElementById('results');
-  const empty = document.getElementById('empty');
-  const resultTitle = document.getElementById('resultTitle');
-  const clearBtn = document.getElementById('clearBtn');
-  const suggestions = document.getElementById('suggestions');
+const DATA=window.MML_DATA;
+const aircraftNames=Object.keys(DATA.aircraft).sort();
+const aircraftSearch=document.getElementById('aircraftSearch');
+const taskSearch=document.getElementById('taskSearch');
+const aircraftList=document.getElementById('aircraftList');
+const cardList=document.getElementById('cardList');
+const showAllCards=document.getElementById('showAllCards');
+const clearAll=document.getElementById('clearAll');
+const results=document.getElementById('results');
+const empty=document.getElementById('empty');
+const resultTitle=document.getElementById('resultTitle');
+const fmt=n=>Number.isInteger(Number(n))?String(Number(n)):Number(n).toFixed(2).replace(/0+$/,'').replace(/\.$/,'');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+document.getElementById('aircraftCount').textContent=aircraftNames.length;
+aircraftList.innerHTML=aircraftNames.map(a=>`<option value="${esc(a)}"></option>`).join('');
 
-  document.getElementById('taskCount').textContent = taskNames.length;
-  document.getElementById('materialCount').textContent =
-    Object.values(cards).reduce((sum, arr) => sum + arr.length, 0);
-
-  const fmt = n => Number.isInteger(n) ? String(n) : Number(n).toFixed(2).replace(/0+$/,'').replace(/\.$/,'');
-  const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-
-  function renderSuggestions() {
-    suggestions.innerHTML = `
-      <button class="chip" id="toggleCards">Tüm ${taskNames.length} kartı göster</button>
-      <div id="allCards" class="hidden" style="display:none;width:100%;flex-wrap:wrap;gap:8px;"></div>
-    `;
-    const allCards = document.getElementById('allCards');
-    allCards.innerHTML = taskNames.map(t => `<button class="chip" data-task="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
-    allCards.querySelectorAll('.chip').forEach(btn => {
-      btn.addEventListener('click', () => { search.value = btn.dataset.task; render(); window.scrollTo({top:0,behavior:'smooth'}); });
-    });
-    const toggle = document.getElementById('toggleCards');
-    toggle.addEventListener('click', () => {
-      const open = allCards.style.display !== 'none';
-      allCards.style.display = open ? 'none' : 'flex';
-      toggle.textContent = open ? `Tüm ${taskNames.length} kartı göster` : 'Kart listesini gizle';
-    });
+function selectedAircraft(){
+  const q=aircraftSearch.value.trim().toUpperCase();
+  return aircraftNames.find(a=>a===q)||null;
+}
+function updateAircraft(){
+  const ac=selectedAircraft();
+  taskSearch.value='';
+  results.innerHTML='';
+  cardList.classList.add('hidden');
+  if(!ac){
+    taskSearch.disabled=true; showAllCards.disabled=true;
+    document.getElementById('taskCount').textContent='0';
+    document.getElementById('materialCount').textContent='0';
+    empty.textContent='Uçak tescilini listeden seçin.';
+    empty.classList.remove('hidden'); resultTitle.classList.add('hidden');
+    return;
   }
-
-  function materialCard(item) {
-    return `
-      <article class="result-card">
-        <div class="card-head">
-          <div>
-            <div class="pn">${escapeHtml(item.pn)}</div>
-            <div class="desc">${escapeHtml(item.description)}</div>
-          </div>
-          <div class="qty">${fmt(item.recommendedQty)}<small>ÇEKİLECEK QTY</small></div>
-        </div>
-        <div class="details">
-          <div class="detail"><span>WO Sayısı</span><b>${item.woCount}</b></div>
-          <div class="detail"><span>Minimum</span><b>${fmt(item.minQty)}</b></div>
-          <div class="detail"><span>Ortalama</span><b>${fmt(item.avgQty)}</b></div>
-          <div class="detail"><span>Maksimum</span><b>${fmt(item.maxQty)}</b></div>
-        </div>
-        <details>
-          <summary>WO bazlı miktarları göster</summary>
-          <div class="wo-box">
-            <b>WO / Qty:</b> ${escapeHtml(item.woQty)}<br>
-            <b>Öneri yöntemi:</b> ${escapeHtml(item.rule)}
-          </div>
-        </details>
-      </article>
-    `;
-  }
-
-  function render() {
-    const q = search.value.trim().toUpperCase();
-    if (!q) {
-      results.innerHTML = '';
-      empty.classList.remove('hidden');
-      resultTitle.classList.add('hidden');
-      return;
-    }
-
-    const matches = taskNames.filter(t => t.includes(q));
-    if (!matches.length) {
-      results.innerHTML = '';
-      empty.textContent = 'Bu Task Card için doğrulanmış ortak malzeme bulunamadı.';
-      empty.classList.remove('hidden');
-      resultTitle.classList.add('hidden');
-      return;
-    }
-
-    empty.classList.add('hidden');
-    const total = matches.reduce((s,t) => s + cards[t].length, 0);
-    resultTitle.textContent = `${matches.length} kart • ${total} ortak malzeme`;
-    resultTitle.classList.remove('hidden');
-
-    results.innerHTML = matches.map(task => `
-      <section>
-        <div class="section-title">${escapeHtml(task)}</div>
-        ${cards[task].map(materialCard).join('')}
-      </section>
-    `).join('');
-  }
-
-  search.addEventListener('input', render);
-  clearBtn.addEventListener('click', () => {
-    search.value = '';
-    empty.textContent = 'Task Card numarası yazarak gerekli ortak malzemeleri görüntüleyin.';
-    render();
-    search.focus();
-  });
-
-  renderSuggestions();
-  render();
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-  }
+  const cards=DATA.aircraft[ac].taskCards;
+  const names=Object.keys(cards);
+  taskSearch.disabled=false; taskSearch.placeholder='Örn: A320-21-075'; showAllCards.disabled=false;
+  document.getElementById('taskCount').textContent=names.length;
+  document.getElementById('materialCount').textContent=Object.values(cards).reduce((s,a)=>s+a.length,0);
+  empty.textContent='Task Card numarası veya kart adı yazın.';
+  empty.classList.remove('hidden'); resultTitle.classList.add('hidden');
+  renderCardList();
+}
+function renderCardList(){
+  const ac=selectedAircraft(); if(!ac)return;
+  const cards=DATA.aircraft[ac].taskCards;
+  cardList.innerHTML=Object.keys(cards).sort().map(task=>{
+    const name=cards[task][0]?.taskName||'';
+    return `<button class="chip" data-task="${esc(task)}">${esc(task)}${name?` — ${esc(name)}`:''}</button>`;
+  }).join('');
+  cardList.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{taskSearch.value=b.dataset.task;renderResults();window.scrollTo({top:0,behavior:'smooth'});});
+}
+function materialCard(item){
+ return `<article class="result-card"><div class="card-head"><div><div class="pn">${esc(item.pn)}</div><div class="desc">${esc(item.description)}</div></div><div class="qty">${fmt(item.recommendedQty)}<small>ÇEKİLECEK QTY</small></div></div><div class="details"><div class="detail"><span>WO Sayısı</span><b>${item.woCount}</b></div><div class="detail"><span>Minimum</span><b>${fmt(item.minQty)}</b></div><div class="detail"><span>Ortalama</span><b>${fmt(item.avgQty)}</b></div><div class="detail"><span>Maksimum</span><b>${fmt(item.maxQty)}</b></div></div><details><summary>WO bazlı miktarları göster</summary><div class="wo-box"><b>WO / Qty:</b> ${esc(item.woQty)}<br><b>Öneri yöntemi:</b> ${esc(item.rule)}</div></details></article>`;
+}
+function renderResults(){
+ const ac=selectedAircraft(); if(!ac)return;
+ const q=taskSearch.value.trim().toUpperCase();
+ const cards=DATA.aircraft[ac].taskCards;
+ if(!q){results.innerHTML='';empty.textContent='Task Card numarası veya kart adı yazın.';empty.classList.remove('hidden');resultTitle.classList.add('hidden');return;}
+ const matches=Object.keys(cards).filter(task=>{
+   const name=(cards[task][0]?.taskName||'').toUpperCase();
+   return task.includes(q)||name.includes(q);
+ });
+ if(!matches.length){results.innerHTML='';empty.textContent='Bu uçakta eşleşen ortak malzemeli Task Card bulunamadı.';empty.classList.remove('hidden');resultTitle.classList.add('hidden');return;}
+ empty.classList.add('hidden');
+ const total=matches.reduce((s,t)=>s+cards[t].length,0);
+ resultTitle.textContent=`${ac} • ${matches.length} kart • ${total} ortak malzeme`;
+ resultTitle.classList.remove('hidden');
+ results.innerHTML=matches.sort().map(task=>{
+   const name=cards[task][0]?.taskName||'';
+   return `<section><div class="section-title">${esc(task)}${name?`<div class="task-name">${esc(name)}</div>`:''}</div>${cards[task].map(materialCard).join('')}</section>`;
+ }).join('');
+}
+aircraftSearch.addEventListener('input',updateAircraft);
+taskSearch.addEventListener('input',renderResults);
+showAllCards.onclick=()=>{if(cardList.classList.contains('hidden')){cardList.classList.remove('hidden');showAllCards.textContent='Kart listesini gizle';}else{cardList.classList.add('hidden');showAllCards.textContent='Tüm kartları göster';}};
+clearAll.onclick=()=>{aircraftSearch.value='';taskSearch.value='';updateAircraft();};
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
 </body>
 </html>
