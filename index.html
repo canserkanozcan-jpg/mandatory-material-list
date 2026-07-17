@@ -1,157 +1,255 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0b2447">
-  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1f33" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Mandatory List" />
+  <link rel="manifest" href="manifest.json" />
   <title>Mandatory Material List</title>
   <style>
     :root {
-      --navy:#0b2447; --blue:#19376d; --cyan:#38bdf8; --bg:#f3f7fb;
-      --card:#fff; --text:#10233f; --muted:#68778a; --line:#dbe5ef;
-      --green:#0f9f6e; --shadow:0 14px 34px rgba(11,36,71,.12);
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --navy: #0b1f33;
+      --blue: #1667c5;
+      --blue-soft: #eaf3ff;
+      --line: #dbe4ef;
+      --text: #182433;
+      --muted: #65758a;
+      --success: #137a45;
+      --danger: #b42318;
+      --shadow: 0 10px 30px rgba(11,31,51,.09);
+      --radius: 18px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;padding:calc(22px + env(safe-area-inset-top)) 20px 34px}
-    .wrap{max-width:840px;margin:auto}
-    .brand{display:flex;align-items:center;gap:13px}
-    .logo{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.13);display:grid;place-items:center;font-size:24px}
-    h1{font-size:25px;margin:0}
-    .subtitle{opacity:.78;margin:5px 0 0;font-size:14px}
-    .meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
-    .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:7px 11px;border-radius:999px;font-size:13px}
-    main{padding:0 16px 40px;margin-top:-18px}
-    .panel{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
-    label{display:block;font-size:13px;font-weight:700;margin:0 0 8px}
-    .searchrow{display:flex;gap:9px}
-    input{flex:1;min-width:0;padding:15px 14px;border:1px solid var(--line);border-radius:13px;font-size:16px;text-transform:uppercase;outline:none}
-    input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(56,189,248,.15)}
-    button{border:0;border-radius:13px;padding:0 18px;background:var(--navy);color:white;font-weight:800;font-size:15px}
-    .hint{margin:10px 2px 0;color:var(--muted);font-size:12px}
-    #result{margin-top:16px}
-    .result{background:white;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-    .topline{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-    .cardno{font-size:22px;font-weight:900;color:var(--navy)}
-    .count{background:#e8f7f2;color:var(--green);padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
-    .tasktitle{font-size:13px;line-height:1.45;color:var(--muted);margin-top:6px}
-    .materials{display:grid;gap:9px;margin-top:17px}
-    .material{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfdff}
-    .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:0 0 auto}
-    .empty{text-align:center;padding:25px 12px;color:var(--muted)}
-    .archive{margin-top:18px}
-    .archive h2{font-size:17px;margin:0 0 11px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{border:1px solid var(--line);background:white;color:var(--blue);border-radius:999px;padding:8px 10px;font-size:12px;font-weight:700;cursor:pointer}
-    footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
-    @media(max-width:520px){button{padding:0 14px} h1{font-size:22px}}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(135deg, #0b1f33, #154b7f);
+      color: white;
+      padding: calc(22px + env(safe-area-inset-top)) 18px 24px;
+      box-shadow: var(--shadow);
+    }
+    .header-inner { max-width: 1050px; margin: 0 auto; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo {
+      width: 46px; height: 46px; border-radius: 14px;
+      display:grid; place-items:center; font-weight:800;
+      background: rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25);
+    }
+    h1 { margin:0; font-size: 22px; letter-spacing:.2px; }
+    .subtitle { margin-top:6px; opacity:.8; font-size:14px; }
+    main { max-width:1050px; margin:0 auto; padding:18px 14px 40px; }
+    .search-card, .result-card, .empty-card, .about-card {
+      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .search-card { padding:16px; margin-bottom:16px; }
+    label { display:block; font-size:13px; color:var(--muted); margin-bottom:8px; font-weight:700; }
+    .search-row { display:flex; gap:10px; }
+    input {
+      width:100%; padding:15px 16px; border:1px solid var(--line); border-radius:14px;
+      font-size:16px; outline:none; background:#fff;
+    }
+    input:focus { border-color:var(--blue); box-shadow:0 0 0 4px rgba(22,103,197,.12); }
+    button {
+      border:0; border-radius:14px; padding:0 18px; font-weight:800;
+      background:var(--blue); color:white; cursor:pointer;
+    }
+    .stats {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px;
+    }
+    .stat {
+      background:var(--blue-soft); border-radius:14px; padding:12px;
+    }
+    .stat b { display:block; font-size:18px; }
+    .stat span { font-size:12px; color:var(--muted); }
+    .suggestions {
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
+    }
+    .chip {
+      border:1px solid var(--line); background:#fff; color:var(--text); padding:8px 11px;
+      border-radius:999px; font-size:13px; cursor:pointer;
+    }
+    .section-title { margin:22px 2px 10px; font-size:16px; color:var(--muted); font-weight:800; }
+    .result-card { margin-bottom:12px; overflow:hidden; }
+    .card-head {
+      padding:16px; display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
+      border-bottom:1px solid var(--line);
+    }
+    .pn { font-size:17px; font-weight:900; word-break:break-word; }
+    .desc { color:var(--muted); margin-top:4px; font-size:14px; }
+    .qty {
+      min-width:86px; text-align:center; border-radius:14px; background:#eaf8f0;
+      color:var(--success); padding:10px 8px; font-weight:900;
+    }
+    .qty small { display:block; font-size:10px; color:#4f7862; margin-top:2px; }
+    .details {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+    }
+    .detail { background:white; padding:12px; }
+    .detail span { display:block; color:var(--muted); font-size:11px; margin-bottom:4px; }
+    .detail b { font-size:14px; }
+    details { border-top:1px solid var(--line); }
+    summary { padding:13px 16px; cursor:pointer; color:var(--blue); font-weight:800; font-size:13px; }
+    .wo-box { padding:0 16px 16px; color:var(--muted); font-size:13px; line-height:1.6; }
+    .empty-card, .about-card { padding:22px; text-align:center; color:var(--muted); }
+    .hidden { display:none; }
+    footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; }
+    @media (max-width:650px) {
+      .details { grid-template-columns:repeat(2,1fr); }
+      .stats { grid-template-columns:1fr 1fr; }
+      .stats .stat:last-child { grid-column:1/-1; }
+      .search-row { flex-direction:column; }
+      button { padding:14px; }
+    }
   </style>
 </head>
 <body>
 <header>
-  <div class="wrap">
+  <div class="header-inner">
     <div class="brand">
-      <div class="logo">✈️</div>
+      <div class="logo">MML</div>
       <div>
         <h1>Mandatory Material List</h1>
-        <p class="subtitle">Task Card Material Finder</p>
+        <div class="subtitle">TC-LUK • PW ENG • NRC hariç doğrulanmış ortak malzemeler</div>
       </div>
-    </div>
-    <div class="meta">
-      <span class="pill">Aircraft: TC-LUK</span>
-      <span class="pill">Engine: PW ENG</span>
-      <span class="pill">Type: A320</span>
     </div>
   </div>
 </header>
 
-<main class="wrap">
-  <section class="panel">
-    <label for="taskInput">Task Card Number</label>
-    <div class="searchrow">
-      <input id="taskInput" placeholder="Example: A320-24-064" autocomplete="off">
-      <button id="searchBtn">SEARCH</button>
+<main>
+  <section class="search-card">
+    <label for="search">Task Card numarasını yaz</label>
+    <div class="search-row">
+      <input id="search" type="search" placeholder="Örn: EO-24-0018 veya A320-21-075" autocomplete="off" />
+      <button id="clearBtn" type="button">Temizle</button>
     </div>
-    <p class="hint">Enter the complete A320 Task Card number.</p>
+    <div class="stats">
+      <div class="stat"><b id="taskCount">0</b><span>Task Card</span></div>
+      <div class="stat"><b id="materialCount">0</b><span>Ortak malzeme satırı</span></div>
+      <div class="stat"><b>%100</b><span>İlgili kartın tüm WO'larında ortak</span></div>
+    </div>
+    <div class="suggestions" id="suggestions"></div>
   </section>
 
-  <section id="result"></section>
-
-  <section class="archive panel">
-    <h2>TC-LUK Archive</h2>
-    <div class="chips" id="chips"></div>
+  <div id="resultTitle" class="section-title hidden"></div>
+  <section id="results"></section>
+  <section id="empty" class="empty-card">
+    Task Card numarası yazarak gerekli ortak malzemeleri görüntüleyin.
   </section>
 </main>
 
-<footer>Mandatory Material List • TC-LUK / PW ENG</footer>
+<footer>
+  Geçmiş doğrulanmış çekim verisine dayanır. Güncel efektivite ve task requirement ayrıca kontrol edilmelidir.
+</footer>
 
+<script src="data.js"></script>
 <script>
-const DB = {"A320-00-001":{"title":"PREPARATION OF MAINTENANCE","materials":["EMG DOOR SLIDE STICKER (8EA)","STATICPSTICKERDAIREUR (6EA)","IKAZKURDELESIBUYF0SF (3)","MPM1.13A/01 R04 (5EA)","G02447 (1EA)","MPM1.13A/09 R01 (40EA)"]},"A320-06-161":{"title":"GVI OF NOSE GEAR AND NOSE GEAR DOORS (EWIS)","materials":["LOTOXANE (1LT)","DIEST0NE-DLS-20LT (0,2 EA)"]},"A320-12-009":{"title":"CLEANING OF BOARDING BRIDGE MARKS AROUND THE DOOR","materials":["LOTOXANE (0,1)"]},"A320-21-003":{"title":"INSPECTION OF THE SIPHON ASSY FOR CLEANLINESS","materials":["LIQUID SOAP(VISCOSITY < 30 MPA.S) (0,5 EA)","QB0553 (IF NEC. 1EA)"]},"A320-21-004":{"title":"DISCARD FILTER CARTRIDGE (PALL)","materials":["21FA322G (1EA)"]},"A320-21-005":{"title":"DISCARD LAVATORY AIR EXTRACTION FILTER ELEMENT","materials":["P15-350S (0,5EA)"]},"A320-21-075":{"title":"CLEANING OF TEMPERATURE SENSORS (LH PACK)","materials":["AS3582-017 (4EA)","NAS1149C0932R (1EA)","VVP236 (0,1EA)","14QDB1 (3FT)"]},"A320-21-076":{"title":"CLEANING OF TEMPERATURE SENSORS (RH PACK)","materials":["AS3582-017 (4EA)","NAS1149C0932R (1EA)","VVP236 (0,1EA)","14QDB1 (3FT)"]},"A320-24-064":{"title":"DISCARD IDG SCAVENGE  AND CHARGE FILTERS, DRAIN AND REPLENISH OIL SYSTEM.","materials":["5909812 (2EA)","AS3208-05 (1EA)","M83248-1-226 (2EA)"]},"A320-24-065":{"title":"CHECK TORQUE OF IDG QUICK-ATTACH-DETACH (QAD) TENSION BOLT","materials":["EASTMAN-TURBO-OIL-2197 (1QT)","WADIS24 (0,2)"]},"A320-25-001":{"title":"CLEAN DOOR GIRT BAR FITTING STOP LEVERS","materials":["LOTOXANE (0,1 EA)"]},"A320-25-013":{"title":"DISCARD AND REPLACE MEGAPHONE BATTERIES","materials":["ALKALINE1-5VKALEMPIL (16EA)"]},"A320-25-022":{"title":"REMOVE AND DISCARD FILTER ELEMENT","materials":["P15-350S (1EA)"]},"A320-25-046":{"title":"CLEAN&CARE PROCEDURE FOR LEATHER COVERS(PAX SEATS)","materials":["LM-023-5LT (1EA)","LM-017 (1EA)"]},"A320-25-050":{"title":"COCKPIT CLEANING","materials":["NETAL2050 (0,1EA)","IS0PR0PYLALC0H0L-1LT (0,1EA)"]},"A320-25-087":{"title":"GENERAL VISUAL INSPECTION OF CABIN","materials":["SSG155-278RE-C153 (2EA)"]},"A320-25-124":{"title":"CLEANING OF MONITORS","materials":["SCREENPAD2000 (6EA)"]},"A320-25-152":{"title":"AISLE CARPET REPLACEMENT","materials":["2BWW1607 (30 SM)","RELINK2318B (2 EA)","GT01288U00N0000 (1KG)"]},"A320-25-172":{"title":"SEAT TRACK CLEANING","materials":["LOTOXANE (0,1)"]},"A320-25-196":{"title":"DETAILED INSPECTION AND CLEANING OF LAVATORY PARTS IN SHOP","materials":["34655.7708.7.170 (0,2)"]},"A320-25-273":{"title":"CLEANING OF THE INNER OVEN","materials":["MPM1.13A/09 R01 (7EA)","LIFSIZBEZ (1EA)","FIRCA1NUMARA (1EA)","GREASESTRIPPLUS (0,3EA)"]},"A320-27-006":{"title":"OPC OF LOGICS ACTIVATING ELAC 1&2, & SEC 1 STBY PWR SPLY & ABILITY OF SEC 1&2 TO ACHIEVE PITCH CTL & ABILITY OF SIDESTICK PRIORITY FUNCTION","materials":["MPM1.13A/09 R01 (10EA)"]},"A320-27-007":{"title":"LUBRICATE FLAP TRACK 1 DRIVE LEVER ARM AND ALL\nCARRIAGE ROLLERS ON ALL FLAP TRACKS-LH WING","materials":["AEROSHELL7-400GM (1 EA)","LOTOXANE (0,1 EA)","AER0SHELLGREASE33-1X17KG (0,5 KG)"]},"A320-27-008":{"title":"LUBRICATE FLAP TRACK 1 DRIVE LEVER ARM AND ALL\nCARRIAGE ROLLERS ON ALL FLAP TRACKS-RH WING","materials":["AEROSHELL7-400GM (1 EA)","LOTOXANE (0,1 EA)","AER0SHELLGREASE33-1X17KG (0,5 KG)"]},"A320-27-009":{"title":"LUBRICATE SPOILER NO 1 TO 5 ACTUATOR ATTACHMENT-LH","materials":["AEROSHELL7-400GM (1EA)"]},"A320-27-010":{"title":"LUBRICATE SPOILER NO 1 TO 5 ACTUATOR ATTACHMENT-RH","materials":["AEROSHELL7-400GM (1EA)"]},"A320-27-011":{"title":"LUBRICATE THS ACTUATOR BALL SCREW NUT","materials":["AEROSHELL7-400GM (1EA)"]},"A320-27-019":{"title":"CHK OIL LEVEL OF THS ACTUATOR GEARBOX","materials":["LOTOXANE (0,1 EA)"]},"A320-28-004":{"title":"SAMPLE FUEL FOR MICROBIO. CONTAMINATION ANALYSIS","materials":["1301960021 FUEL TEST KIT (5 EA)","CAMKAVAN0Z1LITRELIK (3 EA)","ISOPROPYLALCOHOL-1LT (1 EA)","KAVAN0ZKAPAGI (3 EA)"]},"A320-32-002":{"title":"LUBRICATION OF MAIN LANDING GEAR AND DOORS-RH","materials":["LOTOXANE (0,1 EA)","AEROSHELLGREASE22 4X3KG (0,4 KG)","AEROSHELL7-400GM (1 EA)"]},"A320-32-005":{"title":"LUBRICATION OF MAIN LANDING GEAR AND DOORS-LH","materials":["LOTOXANE (0,1 EA)","AEROSHELLGREASE22 4X3KG (0,4 KG)","AEROSHELL7-400GM (1 EA)"]},"A320-32-007":{"title":"LUBRICATION OF NOSE LANDING GEAR AND DOORS","materials":["LOTOXANE (0,1 EA)","AEROSHELLGREASE22 4X3KG (0,4 KG)"]},"A320-32-030":{"title":"LUBRICATION OF GEAR UPLOCK UNITS.","materials":["LOTOXANE (0,1 EA)","AEROSHELLGREASE22 4X3KG (0,4 KG)"]},"A320-36-031":{"title":"REPLACEMENT OF THE HP BLEED VALVE (HPV) CLIP ON A320FAM NEO ENGINES","materials":["13100-400 (2EA)","6753-139 (1EA)"]},"A320-38-002":{"title":"CLEAN FILTER ELEMENT OF WASHBASIN DRAIN VALVES","materials":["7750041-113 (3EA)","7600763SD (2EA)"]},"A320-38-003":{"title":"DISINFECTION OF WATER TANK AND DISTRIBUTION SYST.","materials":["SUNUMUNESIETIKETI (3EA)","SISESTERILSEFFAF-1000ML (2EA)","SISESTERILSEFFAF-500ML (1EA)"]},"A320-38-037":{"title":"WATER FAUCET ADJUSTMENT","materials":["SOLVENT 680 TYPE II (0,1)","RTU CLEANER/DISINFECTANT (0,1)"]},"A320-38-039":{"title":"WASHBASIN FILTER AND DRAIN LINE CLEANING","materials":["DE0D0RANTLISIRKE10 (10EA)"]},"A320-51-001":{"title":"CHECK STRUCTURAL DAMAGE RECORD FILE ON BOARD","materials":["YAPISALHASARKAYIT (50EA)","INOPETIKET (20EA)"]},"A320-52-046":{"title":"FUC OF FWD CARGO COMPARTMENT DOOR, COMPRISING FUNCTIONAL CHECKS OF MECHANISMS","materials":["LOTOXANE (0,05EA)","DINITR0LAV30 (0,1EA)","ISOPROPYLALCOHOL-1LT (0,3EA)"]},"A320-52-075":{"title":"FUC OF AFT CARGO-COMPARTMENT DOOR, COMPRISING FUC OF LOCKING MECHANISM","materials":["LOTOXANE (0,05EA)","DINITR0LAV30 (0,1EA)","ISOPROPYLALCOHOL-1LT (0,3EA)"]},"A320-52-121":{"title":"CLEANING OF PASSENGER/CREW DOORS GUST LOCK MECH.","materials":["MS24665-151 (12EA)","MS24665-153 (4EA)","MS24665-155 (4EA)"]},"A320-72-029":{"title":"CLEAN THE PW1100G ENGINE GASPATH (A320NEO)","materials":["ARDR0X6367 (25LT)","ARDR0X6077 (1LT)"]},"EO-73-PW1100-0003":{"title":"PW1100 REPLACE THE FUEL FILTER ELEMENT","materials":["1020930-4 (1EA)","M83485-1-246 (1EA)"]}};
-const input = document.getElementById('taskInput');
-const result = document.getElementById('result');
-const chips = document.getElementById('chips');
+  const DATA = window.MML_DATA;
+  const cards = DATA.taskCards;
+  const taskNames = Object.keys(cards).sort();
+  const search = document.getElementById('search');
+  const results = document.getElementById('results');
+  const empty = document.getElementById('empty');
+  const resultTitle = document.getElementById('resultTitle');
+  const clearBtn = document.getElementById('clearBtn');
+  const suggestions = document.getElementById('suggestions');
 
-function normalize(v) {
-  return v.trim().toUpperCase().replace(/\s+/g,'').replace(/–|—/g,'-');
-}
+  document.getElementById('taskCount').textContent = taskNames.length;
+  document.getElementById('materialCount').textContent =
+    Object.values(cards).reduce((sum, arr) => sum + arr.length, 0);
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
+  const fmt = n => Number.isInteger(n) ? String(n) : Number(n).toFixed(2).replace(/0+$/,'').replace(/\.$/,'');
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
-function searchTask() {
-  const key = normalize(input.value);
-  const item = DB[key];
-
-  if (!key) {
-    result.innerHTML = '<div class="result empty">Please enter a Task Card number.</div>';
-    return;
+  function renderSuggestions() {
+    const sample = taskNames.slice(0, 8);
+    suggestions.innerHTML = sample.map(t => `<button class="chip" data-task="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
+    suggestions.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => { search.value = btn.dataset.task; render(); });
+    });
   }
 
-  if (!item) {
-    result.innerHTML = `<div class="result empty"><strong>${escapeHtml(key)}</strong><br><br>No material record was found in the TC-LUK archive.</div>`;
-    return;
-  }
-
-  result.innerHTML = `
-    <div class="result">
-      <div class="topline">
-        <div>
-          <div class="cardno">${escapeHtml(key)}</div>
-          <div class="tasktitle">${escapeHtml(item.title)}</div>
+  function materialCard(item) {
+    return `
+      <article class="result-card">
+        <div class="card-head">
+          <div>
+            <div class="pn">${escapeHtml(item.pn)}</div>
+            <div class="desc">${escapeHtml(item.description)}</div>
+          </div>
+          <div class="qty">${fmt(item.recommendedQty)}<small>ÇEKİLECEK QTY</small></div>
         </div>
-        <div class="count">${item.materials.length} MATERIAL${item.materials.length > 1 ? 'S' : ''}</div>
-      </div>
-      <div class="materials">
-        ${item.materials.map(material => `<div class="material"><span class="dot"></span><strong>${escapeHtml(material)}</strong></div>`).join('')}
-      </div>
-    </div>`;
-}
+        <div class="details">
+          <div class="detail"><span>WO Sayısı</span><b>${item.woCount}</b></div>
+          <div class="detail"><span>Minimum</span><b>${fmt(item.minQty)}</b></div>
+          <div class="detail"><span>Ortalama</span><b>${fmt(item.avgQty)}</b></div>
+          <div class="detail"><span>Maksimum</span><b>${fmt(item.maxQty)}</b></div>
+        </div>
+        <details>
+          <summary>WO bazlı miktarları göster</summary>
+          <div class="wo-box">
+            <b>WO / Qty:</b> ${escapeHtml(item.woQty)}<br>
+            <b>Öneri yöntemi:</b> ${escapeHtml(item.rule)}
+          </div>
+        </details>
+      </article>
+    `;
+  }
 
-Object.keys(DB).sort().forEach(key => {
-  const button = document.createElement('button');
-  button.className = 'chip';
-  button.textContent = key;
-  button.onclick = () => {
-    input.value = key;
-    searchTask();
-    window.scrollTo({top:0, behavior:'smooth'});
-  };
-  chips.appendChild(button);
-});
+  function render() {
+    const q = search.value.trim().toUpperCase();
+    if (!q) {
+      results.innerHTML = '';
+      empty.classList.remove('hidden');
+      resultTitle.classList.add('hidden');
+      return;
+    }
 
-document.getElementById('searchBtn').onclick = searchTask;
-input.addEventListener('keydown', event => {
-  if (event.key === 'Enter') searchTask();
-});
+    const matches = taskNames.filter(t => t.includes(q));
+    if (!matches.length) {
+      results.innerHTML = '';
+      empty.textContent = 'Bu Task Card için doğrulanmış ortak malzeme bulunamadı.';
+      empty.classList.remove('hidden');
+      resultTitle.classList.add('hidden');
+      return;
+    }
 
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+    empty.classList.add('hidden');
+    const total = matches.reduce((s,t) => s + cards[t].length, 0);
+    resultTitle.textContent = `${matches.length} kart • ${total} ortak malzeme`;
+    resultTitle.classList.remove('hidden');
+
+    results.innerHTML = matches.map(task => `
+      <section>
+        <div class="section-title">${escapeHtml(task)}</div>
+        ${cards[task].map(materialCard).join('')}
+      </section>
+    `).join('');
+  }
+
+  search.addEventListener('input', render);
+  clearBtn.addEventListener('click', () => {
+    search.value = '';
+    empty.textContent = 'Task Card numarası yazarak gerekli ortak malzemeleri görüntüleyin.';
+    render();
+    search.focus();
+  });
+
+  renderSuggestions();
+  render();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  }
 </script>
 </body>
 </html>
