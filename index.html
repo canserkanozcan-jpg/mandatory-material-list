@@ -171,10 +171,20 @@
   const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
   function renderSuggestions() {
-    const sample = taskNames.slice(0, 8);
-    suggestions.innerHTML = sample.map(t => `<button class="chip" data-task="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
-    suggestions.querySelectorAll('.chip').forEach(btn => {
-      btn.addEventListener('click', () => { search.value = btn.dataset.task; render(); });
+    suggestions.innerHTML = `
+      <button class="chip" id="toggleCards">Tüm ${taskNames.length} kartı göster</button>
+      <div id="allCards" class="hidden" style="display:none;width:100%;flex-wrap:wrap;gap:8px;"></div>
+    `;
+    const allCards = document.getElementById('allCards');
+    allCards.innerHTML = taskNames.map(t => `<button class="chip" data-task="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
+    allCards.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => { search.value = btn.dataset.task; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+    });
+    const toggle = document.getElementById('toggleCards');
+    toggle.addEventListener('click', () => {
+      const open = allCards.style.display !== 'none';
+      allCards.style.display = open ? 'none' : 'flex';
+      toggle.textContent = open ? `Tüm ${taskNames.length} kartı göster` : 'Kart listesini gizle';
     });
   }
 
